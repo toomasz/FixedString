@@ -10,7 +10,7 @@ String library for embedded systems that won't make your heap fragmented
  - I strongly recommend reading following articles:
    - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
    - [What is heap fragmentation](http://blog.quasardb.net/what-is-heap-fragmentation/)
-###### Features:
+###### Features
   - String size need to be specified upfront, like in C string:
     So instead of using:
     `char[20] str = "some string"`
@@ -21,9 +21,12 @@ String library for embedded systems that won't make your heap fragmented
   - appendFormat() adds requested format string into FixedString, e.g: `str.appendFormat("%s %d", "abc", 10)` will append `abc10`
   - Supports storing binary buffers with '\0' characters
   - When string buffer overrun occurs, program won't crash, instead glabl variable FixedString_OverflowDetected will be set to true.
-###### Cons:
+###### Cons
   - C++ Generics are used to specify buffer size which makes compile time longer and program size larger
   - It is not expandable, you have to know maximum expected size of string at compile time, same as `char[NN]` array
+###### Todo
+  - Add more methods, for example replace, trim - contributions are welcome!
+
 ###### Example:
  
  Following program:
