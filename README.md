@@ -18,9 +18,12 @@ String library for embedded systems that won't make your heap fragmented
     `SimpleString<20> str = "some string"`
   - c_str() method will return null terminated string
   - length() will return actual string length, not including null character
+  - appendFormat() adds requested format string into FixedString, e.g: `str.appendFormat("%s %d", "abc", 10)` will append `abc10`
   - Supports storing binary buffers with '\0' characters
   - When string buffer overrun occurs, program won't crash, instead glabl variable FixedString_OverflowDetected will be set to true.
-  
+###### Cons:
+  - C++ Generics are used to specify buffer size which makes compile time longer and program size larger
+  - It is not expandable, you have to know maximum expected size of string at compile time, same as `char[NN]` array
 ###### Example:
  
  Following program:
@@ -58,6 +61,15 @@ void setup()
     // string is full, this append will fail and set FixedString_OverflowDetected to true
     formatString.append('X'); 
     formatString.debug();
+
+    FixedString<4> formatString1;
+
+    // this will fail as format string result will have 5 byte length
+    formatString1.appendFormat("%d %d", 10, 20);
+    formatString1.debug();
+
+    formatString1.appendFormat("%d%d", 10, 20);
+    formatString1.debug();
 }
 
 void loop() 
@@ -77,7 +89,13 @@ content: 'abcxy12345' length: 10, free = 90
 content: 'abcxy1234512' length: 12, free = 88
 content: 'Some  may never live' length: 20, free = 80
 content: 'Some  may never live but the crazy will never die' length: 49, free = 51
-content: '10 20 3' length: 8, free = 0
-content: '10 20 3' length: 8, free = 0
+content: '10 20 30' length: 8, free = 0
+content: '10 20 30' length: 8, free = 0
+Fatal error, string overun detected!
+content: '' length: 0, free = 4
+Fatal error, string overun detected!
+content: '1020' length: 4, free = 0
+Fatal error, string overun detected!
 Fatal error, one of FixedString were to small to fit content!
+
 ```
