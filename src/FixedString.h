@@ -149,12 +149,18 @@ public:
 		return true;
 	}
 
-	void appendFormat(const char *format, ...)
+	bool appendFormat(const char *format, ...)
 	{
 	    va_list argptr;
         va_start(argptr, format);
-		auto remainingSpace = freeBytes();
-	    auto addedCharacters = vsnprintf(_string + _length, remainingSpace, format, argptr);
+		auto remainingBufferSpace = N-_length +1;
+		
+		int formattedStringSize = vsnprintf(0, 0, format, argptr);
+		if (!AssertSpaceAvailable(formattedStringSize))
+		{
+			return false;
+		}
+	    auto addedCharacters = vsnprintf(_string + _length,	remainingBufferSpace, format, argptr);
 		_length += addedCharacters;
 		va_end(argptr);
 	}
