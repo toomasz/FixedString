@@ -1,12 +1,12 @@
-# Arduino Fixed String
+# Arduino/ESP8266 Fixed String
 
 String library for embedded systems that won't make your heap fragmented
 
 ###### Why this library was created?
 
- - Arduino String uses malloc internally and will eventually make heap fragmented and program will crash
- - C strings are too hard to use and it's easy to overflow string buffer that will be hard to debug
- -Heap fragmentation is especially dangerous in Embedded systems du to low memory, e.g Arduino has 2k bytes only, esp8266
+ - Arduino String uses `malloc()` internally and will eventually make heap fragmented and program will crash
+ - C strings are too hard to use and it's way too easy to overflow buffer and that will be hard to debug
+ -Heap fragmentation is especially dangerous in Embedded systems due to low memory, e.g Arduino has 2k bytes only, esp8266
  - I strongly recommend reading following articles:
    - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
    - [What is heap fragmentation](http://blog.quasardb.net/what-is-heap-fragmentation/)
@@ -17,6 +17,8 @@ String library for embedded systems that won't make your heap fragmented
     use:
     `SimpleString<20> str = "some string"`
   - c_str() method will return null terminated string
+  - length() will return actual string length, not including null character
+  - Supports storing binary buffers with '\0' characters
   - When string buffer overrun occurs, program won't crash, instead glabl variable FixedString_OverflowDetected will be set to true.
   
 ###### Example:
