@@ -7,9 +7,9 @@ String library for embedded systems that won't make your heap fragmented
  - Arduino String uses malloc internally and will eventually make heap fragmented and program will crash
  - C strings are too hard to use and it's easy to overflow string buffer that will be hard to debug
  -Heap fragmentation is especially dangerous in Embedded systems du to low memory, e.g Arduino has 2k bytes only, esp8266
- - I recommend reading following articles:
-  - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
-  - [What is heap fragmentation] (http://blog.quasardb.net/what-is-heap-fragmentation/)
+ - I strongly recommend reading following articles:
+   - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
+   - [What is heap fragmentation](http://blog.quasardb.net/what-is-heap-fragmentation/)
 ###### Features:
   - String size need to be specified upfront, like in C string:
     So instead of using:
