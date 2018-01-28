@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map For FixedString
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+FixedString	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+append	KEYWORD2
+appendFormat	KEYWORD2
+c_str	KEYWORD2
+length	KEYWORD2
+capacity	KEYWORD2
+freeBytes	KEYWORD2
+debug	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
