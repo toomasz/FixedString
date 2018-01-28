@@ -1,2 +1,5 @@
-# ArduinoFixedString
-String library for embedded systems that don't cause heap fragmentation
+# Arduino Fixed String
+
+String library for embedded systems that won't make your heap fragmented
+
+
