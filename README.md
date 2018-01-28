@@ -26,6 +26,7 @@ String library for embedded systems that won't make your heap fragmented
   - It is not expandable, you have to know maximum expected size of string at compile time, same as `char[NN]` array
 ###### Todo
   - Add more methods, for example replace, trim - contributions are welcome!
+  - Get rid of hack with FixedStringBase
 
 ###### Example:
  
