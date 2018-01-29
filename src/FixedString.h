@@ -163,6 +163,7 @@ public:
 	    auto addedCharacters = vsnprintf(_string + _length,	remainingBufferSpace, format, argptr);
 		_length += addedCharacters;
 		va_end(argptr);
+		return true;
 	}
 
 	void debug()
