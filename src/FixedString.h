@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _FIXED_STRING_H
+#define _FIXED_STRING_H
 
 #include <Arduino.h>
 
@@ -6,9 +7,14 @@ class FixedStringBase
 {
 public:
 	virtual const unsigned int length() const = 0;
+	virtual const unsigned int capacity() const = 0;
+
 	virtual const char *c_str() const = 0;
 	virtual bool append(const char *str, unsigned int len) = 0;
+	virtual bool append(char c) = 0;
+
 	virtual ~FixedStringBase() = default;
+	virtual void clear() = 0;
 };
 
 extern bool FixedString_OverflowDetected;
@@ -149,21 +155,14 @@ public:
 		return true;
 	}
 
-	bool appendFormat(const char *format, ...)
+	void appendFormat(const char *format, ...)
 	{
 	    va_list argptr;
         va_start(argptr, format);
-		auto remainingBufferSpace = N-_length +1;
-		
-		int formattedStringSize = vsnprintf(0, 0, format, argptr);
-		if (!AssertSpaceAvailable(formattedStringSize))
-		{
-			return false;
-		}
-	    auto addedCharacters = vsnprintf(_string + _length,	remainingBufferSpace, format, argptr);
+		auto remainingSpace = freeBytes();
+	    auto addedCharacters = vsnprintf(_string + _length, remainingSpace, format, argptr);
 		_length += addedCharacters;
 		va_end(argptr);
-		return true;
 	}
 
 	void debug()
@@ -175,3 +174,6 @@ public:
         }
 	}
 };
+
+#endif
+
