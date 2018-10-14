@@ -183,6 +183,24 @@ public:
 		return memcmp_P(_string, other, _length) == 0;
 	}
 
+	bool startsWith(const char* other)
+	{
+		auto otherLength = strlen(other);
+		if (otherLength > _length)
+		{
+			return false;
+		}
+		return memcmp(_string, other, otherLength) == 0;
+	}
+	bool startsWith(const __FlashStringHelper* other)
+	{
+		auto otherLength = strlen_P((PGM_P)other);
+		if (otherLength > _length)
+		{
+			return false;
+		}
+		return memcmp_P(_string, other, otherLength) == 0;
+	}
 	void appendFormat(const char *format, ...)
 	{
 	    va_list argptr;
