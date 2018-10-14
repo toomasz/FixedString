@@ -2,6 +2,7 @@
 #define _FIXED_STRING_H
 
 #include <Arduino.h>
+#include <pgmspace.h>
 
 class FixedStringBase
 {
@@ -153,6 +154,33 @@ public:
 		_string[_length] = c;
 		_length++;
 		return true;
+	}
+
+	bool operator==(const char *str)
+	{
+		return equals(str);
+	}
+	bool operator==(const __FlashStringHelper *other)
+	{
+		return equals(other);
+	}
+	bool equals(const char* other)
+	{
+		auto otherLength = strlen(other);
+		if (otherLength != _length)
+		{
+			return false;
+		}
+		return memcmp(_string, other, _length) == 0;
+	}
+	bool equals(const __FlashStringHelper *other)
+	{
+		auto otherLength = strlen_P((PGM_P)other);
+		if (otherLength != _length)
+		{
+			return false;
+		}
+		return memcmp_P(_string, other, _length) == 0;
 	}
 
 	void appendFormat(const char *format, ...)
