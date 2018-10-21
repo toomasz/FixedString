@@ -221,5 +221,8 @@ public:
 	}
 };
 
+typedef FixedString<20> FixedString20;
+typedef FixedString<150> FixedString150;
+
 #endif
 
