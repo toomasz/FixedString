@@ -10,8 +10,10 @@ String library for embedded systems that won't make your heap fragmented
  - I strongly recommend reading following articles:
    - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
    - [What is heap fragmentation](http://blog.quasardb.net/what-is-heap-fragmentation/)
-###### Features
-  - String size need to be specified upfront, like in C string:
+###### Features  
+  - No need to use plain string function like strlen, strcmp anymore
+  - It's safer than using raw arrays
+  - String size needs to be specified upfront, like in C string:
     So instead of using:
     `char[20] str = "some string"`
     use:
@@ -20,19 +22,18 @@ String library for embedded systems that won't make your heap fragmented
   - length() will return actual string length, not including null character
   - appendFormat() adds requested format string into FixedString, e.g: `str.appendFormat("%s %d", "abc", 10)` will append `abc10`
   - Supports storing binary buffers with '\0' characters
+  - It has overhead of 5 bytes, 2 bytes for length, 2 bytes for capacity and 1 byte to allow returning null terminated string. For example, FixedString<20> will use 25 bytes of memory
   - When string buffer overrun occurs, program won't crash, instead glabl variable FixedString_OverflowDetected will be set to true.
 ###### Cons
   - C++ Generics are used to specify buffer size which makes compile time longer and program size larger
-  - It is not expandable, you have to know maximum expected size of string at compile time, same as `char[NN]` array
+  - It is not expandable, you have to know maximum expected size of string at compile time, same as `char[NN]` array  
 ###### Todo
   - Add more methods, for example replace, trim - contributions are welcome!
-  - Get rid of hack with FixedStringBase
-
 ###### Example:
  
  Following program:
  
-```
+```C++
 #include <FixedString.h>
 
 
