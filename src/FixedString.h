@@ -190,6 +190,12 @@ public:
 		auto addedCharacters = vsnprintf((char*)c_str() + _length, remainingSpace, format, argptr);
 		_length += addedCharacters;
 	}
+	void appendFormatV(const __FlashStringHelper *format, va_list argptr)
+	{
+		auto remainingSpace = freeBytes();
+		auto addedCharacters = vsnprintf_P((char*)c_str() + _length, remainingSpace, (PGM_P)format, argptr);
+		_length += addedCharacters;
+	}
 
 	void debug()
 	{
@@ -238,6 +244,13 @@ public:
 		FixedString<N> FixedString(*this);
 		FixedString += FixedString1;
 		return FixedString;
+	}
+
+	FixedString<N>& operator=(const __FlashStringHelper *str)
+	{
+		clear();
+		append((PGM_P)str);
+		return *this;
 	}
 };
 typedef FixedString<10> FixedString10;
