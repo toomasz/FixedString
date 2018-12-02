@@ -163,6 +163,16 @@ public:
 		}
 		return memcmp_P(c_str(), other, otherLength) == 0;
 	}
+
+	bool endsWith(const __FlashStringHelper* other)
+	{
+		auto otherLength = strlen_P((PGM_P)other);
+		if (otherLength > _length)
+		{
+			return false;
+		}
+		return memcmp_P(c_str() + _length - otherLength, other, otherLength) == 0;
+	}
 #endif
 
 	bool startsWith(const char* other)
