@@ -9,7 +9,7 @@ String library for embedded systems that won't make your heap fragmented
  -Heap fragmentation is especially dangerous in Embedded systems due to low memory, e.g Arduino has 2k bytes only, esp8266
  - I strongly recommend reading following articles:
    - [The evils of arduino strings](https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/)
-   - [What is heap fragmentation](http://blog.quasardb.net/what-is-heap-fragmentation/)
+   - [What is heap fragmentation](https://cpp4arduino.com/2018/11/06/what-is-heap-fragmentation.html)
 ###### Features  
   - No need to use plain string function like strlen, strcmp anymore
   - It's safer than using raw arrays
