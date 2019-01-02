@@ -140,6 +140,16 @@ public:
 		}
 		return memcmp(c_str(), other, _length) == 0;
 	}
+
+	bool equals(const FixedStringBase& other)
+	{
+		auto otherLength = other.length();
+		if (otherLength != _length)
+		{
+			return false;
+		}
+		return memcmp(c_str(), other.c_str(), _length) == 0;
+	}
 #if !TEST
 	bool operator==(const __FlashStringHelper* other)
 	{
