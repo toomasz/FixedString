@@ -108,13 +108,31 @@ public:
 		_length += len;
 		return true;
 	}
+	bool append(FixedStringBase& str)
+	{
+		return append(str.c_str(), str.length());
+	}
 
+	bool append(const __FlashStringHelper* str, unsigned int len)
+	{
+		if (!AssertSpaceAvailable(len))
+		{
+			return false;
+		}
+		memcpy_P(_str() + _length, str, len);
+		_length += len;
+		return true;
+	}
 	bool append(const char* str)
 	{
 		const unsigned int len = strlen(str);
 		return append(str, len);
 	}
-
+	bool append(const __FlashStringHelper* str)
+	{
+		const unsigned int len = strlen_P((PGM_P)str);
+		return append(str, len);
+	}
 	bool append(char c)
 	{
 		if (!AssertSpaceAvailable(1))
@@ -204,6 +222,18 @@ public:
 		_length += addedCharacters;
 		va_end(argptr);
 	}
+
+	void appendFormat(const __FlashStringHelper* format, ...)
+	{
+		va_list argptr;
+		va_start(argptr, format);
+		auto remainingSpace = freeBytes();
+		auto addedCharacters = vsnprintf_P((char*)c_str() + _length, remainingSpace, (PGM_P)format, argptr);
+		_length += addedCharacters;
+		va_end(argptr);
+	}
+
+
 	void appendFormat(const char *format, va_list argptr)
 	{		
 		auto remainingSpace = freeBytes();
