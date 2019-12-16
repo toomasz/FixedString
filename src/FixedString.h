@@ -303,12 +303,13 @@ public:
 		return *this;
 	}
 };
-typedef FixedString<10> FixedString10;
-typedef FixedString<20> FixedString20;
-typedef FixedString<50> FixedString50;
-typedef FixedString<100> FixedString100;
-typedef FixedString<150> FixedString150;
-typedef FixedString<200> FixedString200;
+typedef FixedString<16> FixedString16;
+typedef FixedString<32> FixedString32;
+typedef FixedString<64> FixedString64;
+typedef FixedString<128> FixedString128;
+typedef FixedString<256> FixedString256;
+typedef FixedString<512> FixedString512;
+typedef FixedString<1024> FixedString1024;
 
 #pragma pack(pop)
 
