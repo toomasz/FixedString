@@ -213,6 +213,31 @@ public:
 		return memcmp((char*)c_str(), other, otherLength) == 0;
 	}
 
+	void replace(char toReplace, char replaceWith)
+	{
+		for(size_t i =0; i < length(); i++)
+		{
+			if(_str()[i] == toReplace)
+			{
+				_str()[i] = replaceWith;
+			}
+		}
+	}
+	void trimStart(char c)
+	{
+		size_t charactersToTrim = 0;
+		while(charactersToTrim < length() && c_str()[charactersToTrim] == c)
+		{
+			charactersToTrim++;
+		}
+		for(size_t i =0; i < length(); i++)
+		{
+			_str()[i] = _str()[i+charactersToTrim];
+		}
+		_length -= charactersToTrim;
+		_str()[length()] = 0;
+	}
+
 	void appendFormat(const char *format, ...)
 	{
 		va_list argptr;
